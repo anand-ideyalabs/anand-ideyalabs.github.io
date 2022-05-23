@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <title>iOS Automatic Deep Linking</title>
-    <script src='//code.jquery.com/jquery-1.11.2.min.js'></script>
-    <script src='//mobileesp.googlecode.com/svn/JavaScript/mdetect.js'></script>
-    <script>
-    (function() {
-  var app = {
-    launchApp: function() {
-      window.location.replace("coyni.com://paidorder?amount=1&wallet=9b303505-5371-4c36-917a-de7db0e9fdfe");
-      this.timer = setTimeout(this.openWebApp, 1000);
-    },
+<head>
+<title>Page Title</title>
+</head>
+<body>
 
-    openWebApp: function() {
-      window.location.replace("https://apps.apple.com/in/app/facebook/id284882215");
-    }
-  };
+<h1>Gucci Checkout</h1>
 
-  app.launchApp();
-})();
-    </script>
-    <style type="text/css">
-      .twitter-detect {
-        display: none;
-      }
-    </style>
-    </head>
-    <body>
-    <p>Website content.</p>
-    </body>
+  <label for="username">WalletId:</label><br>
+  <input type="text" id="walletId" name="walletId"><br>
+  <label for="email">Amount:</label><br>
+  <input type="number" id="amount" name="amount"><br><br>
+  <input type="button" value="Pay with coyni" onclick = "onSubmit()"/>
+</body>
+<script>
+
+function onSubmit() {
+
+	var intVal = 10;
+	var walletId = document.getElementById('walletId').value;
+	var amount = document.getElementById('amount').value;
+	var values = "wallet="+walletId + "&amount="+amount;
+	try {
+		location.href='coynitest.com://paidorder?'+ values;
+		//setTimeout(function() {            
+		//	location.href="market://details?id=com.adobe.scan.android"
+        //}, 500);
+		//location.href='coynitest.com://paidorder?'+ values;
+		//location.href="market://details?id=com.adobe.scan.android"
+	} catch(err) {
+		alert("Test");
+		location.href="market://details?id=com.adobe.scan.android"
+	}
+	
+	//location.href='intent:#Intent;action=com.myownandroid.testing;category=android.intent.category.DEFAULT;category=android.intent.category.BROWSABLE;'+ values +';end'
+	//alert(username + " - On Submit Clicked -- "+ email);
+	//<a href="intent:#Intent;action=com.myownandroid.testing;category=android.intent.category.DEFAULT;category=android.intent.category.BROWSABLE;S.msg_from_browser=Launched%20from%20Browser;end">Click this link to launch you app from web</a>
+
+}
+
+var launch = "";
+</script>
+
 </html>
+
+
+
