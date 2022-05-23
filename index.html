@@ -17,19 +17,21 @@
 
 function onSubmit() {
 
+	var os = getOS();
 	var intVal = 10;
 	var walletId = document.getElementById('walletId').value;
 	var amount = document.getElementById('amount').value;
 	var values = "wallet="+walletId + "&amount="+amount;
 	try {
 		location.href='coynitest.com://paidorder?'+ values;
-		//setTimeout(function() {            
-		//	location.href="market://details?id=com.adobe.scan.android"
-        //}, 500);
-		//location.href='coynitest.com://paidorder?'+ values;
-		//location.href="market://details?id=com.adobe.scan.android"
+		setTimeout(function() {
+			if(os.includes("Android")) {
+				location.href="market://details?id=com.adobe.scan.android"
+			} else  {
+				location.href="https://apps.apple.com/in/app/facebook/id284882215"
+			}
+        }, 500);
 	} catch(err) {
-		alert("Test");
 		location.href="market://details?id=com.adobe.scan.android"
 	}
 	
@@ -37,6 +39,22 @@ function onSubmit() {
 	//alert(username + " - On Submit Clicked -- "+ email);
 	//<a href="intent:#Intent;action=com.myownandroid.testing;category=android.intent.category.DEFAULT;category=android.intent.category.BROWSABLE;S.msg_from_browser=Launched%20from%20Browser;end">Click this link to launch you app from web</a>
 
+}
+
+function getOS() {
+	var osName = "Unknown OS";
+	if (navigator.userAgent.indexOf("Win") != -1) {
+		osName = "Windows OS";
+	} else if (navigator.userAgent.indexOf("Mac") != -1) {
+		osName = "Macintosh";
+	} else if (navigator.userAgent.indexOf("Android") != -1) {
+		osName = "Android OS";
+    } else  if (navigator.userAgent.indexOf("Linux") != -1) {
+		osName = "Linux OS";
+    }  else if (navigator.userAgent.indexOf("like Mac") != -1) {
+		osName = "iOS";
+	}
+  return osName;
 }
 
 var launch = "";
