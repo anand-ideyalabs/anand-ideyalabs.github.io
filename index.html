@@ -7,32 +7,50 @@
 
 <h1>Gucci Checkout</h1>
 
-  <label for="username">WalletId:</label><br>
-  <input type="text" id="walletId" name="walletId"><br>
-  <label for="email">Amount:</label><br>
-  <input type="number" id="amount" name="amount"><br><br>
-  <input type="button" value="Pay with coyni" onclick = "onSubmit()"/>
+  <label>WalletId: 4c76877b-64f8-46e7-a814-18c1000bf79c</label><br><br>
+
+  <label >Amount: 2.00</label><br><br>
+  <input type="button" id="submit" value="Pay with coyni" onclick = "onSubmit()"/>
 </body>
+
 <script>
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  //  alert("On Ready");
+    if(confirm("Do u want to Open Coyni App?")) {
+    // window.location.href = "https://apps.apple.com/in/app/facebook/id284882215"
+    onSubmit();
+}
+	
+	setTimeout(function() {
+		 var submitButton = document.getElementById("submit");
+		 submitButton.onclick = function() {
+		   onSubmit(); // this will trigger the click event
+		};
+	}, 1000);
+});
 
 function onSubmit() {
 
 	var os = getOS();
 	var intVal = 10;
-	var walletId = document.getElementById('walletId').value;
-	var amount = document.getElementById('amount').value;
+	var walletId = "4c76877b-64f8-46e7-a814-18c1000bf79c";
+	var amount = "2.00";
 	var values = "wallet="+walletId + "&amount="+amount;
 	try {
 		location.href='coynitest.com://paidorder?'+ values;
 		setTimeout(function() {
 			if(os.includes("Android")) {
 				location.href="market://details?id=com.adobe.scan.android"
-			} else  {
-				location.href="https://apps.apple.com/in/app/facebook/id284882215"
+			} else if(os.includes("iOS")) {
+				//check for iphone url
+        
+        location.href="https://apps.apple.com/in/app/facebook/id284882215"
+
 			}
         }, 500);
 	} catch(err) {
-		location.href="market://details?id=com.adobe.scan.android"
+		location.href="https://apps.apple.com/in/app/facebook/id284882215"
 	}
 	
 	//location.href='intent:#Intent;action=com.myownandroid.testing;category=android.intent.category.DEFAULT;category=android.intent.category.BROWSABLE;'+ values +';end'
@@ -57,10 +75,6 @@ function getOS() {
   return osName;
 }
 
-var launch = "";
 </script>
 
 </html>
-
-
-
