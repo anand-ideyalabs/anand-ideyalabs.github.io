@@ -1,80 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Page Title</title>
-</head>
-<body>
-
-<h1>Gucci Checkout</h1>
-
-  <label>WalletId: 4c76877b-64f8-46e7-a814-18c1000bf79c</label><br><br>
-
-  <label >Amount: 2.00</label><br><br>
-  <input type="button" id="submit" value="Pay with coyni" onclick = "onSubmit()"/>
-</body>
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function(event) {
-  //  alert("On Ready");
-    if(confirm("Do u want to Open Coyni App?")) {
-    // window.location.href = "https://apps.apple.com/in/app/facebook/id284882215"
-    onSubmit();
-}
-	
-	setTimeout(function() {
-		 var submitButton = document.getElementById("submit");
-		 submitButton.onclick = function() {
-		   onSubmit(); // this will trigger the click event
-		};
-	}, 1000);
-});
-
-function onSubmit() {
-
-	var os = getOS();
-	var intVal = 10;
-	var walletId = "4c76877b-64f8-46e7-a814-18c1000bf79c";
-	var amount = "2.00";
-	var values = "wallet="+walletId + "&amount="+amount;
-	try {
-		location.href='coynitest.com://paidorder?'+ values;
-		setTimeout(function() {
-			if(os.includes("Android")) {
-				location.href="market://details?id=com.adobe.scan.android"
-			} else if(os.includes("iOS")) {
-				//check for iphone url
-        
-        location.href="https://apps.apple.com/in/app/facebook/id284882215"
-
-			}
-        }, 500);
-	} catch(err) {
-		location.href="https://apps.apple.com/in/app/facebook/id284882215"
-	}
-	
-	//location.href='intent:#Intent;action=com.myownandroid.testing;category=android.intent.category.DEFAULT;category=android.intent.category.BROWSABLE;'+ values +';end'
-	//alert(username + " - On Submit Clicked -- "+ email);
-	//<a href="intent:#Intent;action=com.myownandroid.testing;category=android.intent.category.DEFAULT;category=android.intent.category.BROWSABLE;S.msg_from_browser=Launched%20from%20Browser;end">Click this link to launch you app from web</a>
-
-}
-
-function getOS() {
-	var osName = "Unknown OS";
-	if (navigator.userAgent.indexOf("Win") != -1) {
-		osName = "Windows OS";
-	} else if (navigator.userAgent.indexOf("Mac") != -1) {
-		osName = "Macintosh";
-	} else if (navigator.userAgent.indexOf("Android") != -1) {
-		osName = "Android OS";
-    } else  if (navigator.userAgent.indexOf("Linux") != -1) {
-		osName = "Linux OS";
-    }  else if (navigator.userAgent.indexOf("like Mac") != -1) {
-		osName = "iOS";
-	}
-  return osName;
-}
-
-</script>
-
+    <head>
+    <title>iOS Automatic Deep Linking</title>
+    <script src='//code.jquery.com/jquery-1.11.2.min.js'></script>
+    <script src='//mobileesp.googlecode.com/svn/JavaScript/mdetect.js'></script>
+    <script>
+      (function ($, MobileEsp) {
+        // On document ready, redirect to the App on the App store.
+        $(function () {
+          if (typeof MobileEsp.DetectIos !== 'undefined' && MobileEsp.DetectIos()) {
+            // Add an iframe to twitter://, and then an iframe for the app store
+            // link. If the first fails to redirect to the Twitter app, the
+            // second will redirect to the app on the App Store. We use jQuery
+            // to add this after the document is fully loaded, so if the user
+            // comes back to the browser, they see the content they expect.
+            $('body').append('<iframe class="twitter-detect" src="coynitest.com://paidorder?amount=1&wallet=9b303505-5371-4c36-917a-de7db0e9fdfe" />')
+              .append('<iframe class="twitter-detect" src="https://apps.apple.com/in/app/facebook/id284882215" />');
+          }
+        });
+      })(jQuery, MobileEsp);
+    </script>
+    <style type="text/css">
+      .twitter-detect {
+        display: none;
+      }
+    </style>
+    </head>
+    <body>
+    <p>Website content.</p>
+    </body>
 </html>
