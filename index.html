@@ -18,29 +18,46 @@
     </div>
     <script>
 
-    // You have the whole queryString ready for you here in a key->value form.
-    // In the edge case where there are multiple values, the value is an array.
-    var qs = AppRedirect.queryString;
+var deeplinkUrl = `coynitest.com://paidorder?wallet=816uioyiuihihui7861&amount=10`;
+//variable will check app installed or not
+var change = false;
+setTimeout(() => {
+  if (!change) {
+    var redirectUrl = "https://itunes.apple.com/il/app/twitter/id333903271?mt=8";
+    window.location = redirectUrl;
+  }
+}, 3000);
+window.location = deeplinkUrl;
+//handle event to check app installed or not
+window.onblur = function () {
+    change = true;
+};
+window.onfocus = function(){
+    change = false;
+}
+    // // You have the whole queryString ready for you here in a key->value form.
+    // // In the edge case where there are multiple values, the value is an array.
+    // var qs = AppRedirect.queryString;
 
-    // Here we initiate the redirect process
-    AppRedirect.redirect({
+    // // Here we initiate the redirect process
+    // AppRedirect.redirect({
 
-        iosApp: 'coynitest.com://paidorder?wallet=816uioyiuihihui7861&amount=10',
+    //     iosApp: 'coynitest.com://paidorder?wallet=816uioyiuihihui7861&amount=10',
 
-        iosAppStore: 'https://itunes.apple.com/il/app/twitter/id333903271?mt=8&message=' ,
+    //     iosAppStore: 'https://itunes.apple.com/il/app/twitter/id333903271?mt=8&message=' ,
 
-        // For this, your app need to have category filter: android.intent.category.BROWSABLE
-        android: {
-            'host': 'post/?message=' + encodeURIComponent(qs['message']), // Host/path/querystring part in a custom scheme URL
-            // 'action': '', // Equivalent to ACTION in INTENTs
-            // 'category': '', // Equivalent to CATEGORY in INTENTs
-            // 'component': '', // Equivalent to COMPONENT in INTENTs
-            'scheme': 'twitter', // Scheme part in a custom scheme URL
-            'package': 'com.twitter.android', // Package name in Play store
-            'fallback': 'https://play.google.com/store/apps/details?id=com.twitter.android&hl=en&message=' + qs['message']
-        }
+    //     // For this, your app need to have category filter: android.intent.category.BROWSABLE
+    //     android: {
+    //         'host': 'post/?message=' + encodeURIComponent(qs['message']), // Host/path/querystring part in a custom scheme URL
+    //         // 'action': '', // Equivalent to ACTION in INTENTs
+    //         // 'category': '', // Equivalent to CATEGORY in INTENTs
+    //         // 'component': '', // Equivalent to COMPONENT in INTENTs
+    //         'scheme': 'twitter', // Scheme part in a custom scheme URL
+    //         'package': 'com.twitter.android', // Package name in Play store
+    //         'fallback': 'https://play.google.com/store/apps/details?id=com.twitter.android&hl=en&message=' + qs['message']
+    //     }
 
-    });
+    // });
 
     </script>
 </body>
