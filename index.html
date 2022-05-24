@@ -4,23 +4,28 @@
     <title>iOS Automatic Deep Linking</title>
     <script src='//code.jquery.com/jquery-1.11.2.min.js'></script>
     <script src='//mobileesp.googlecode.com/svn/JavaScript/mdetect.js'></script>
-    <script>
+    <script type="text/javascript">
+      var timer;
+      window.addEventListener("pageshow", function(evt){
+clearTimeout(timer);
+}, false);
+      window.addEventListener("pagehide", function(evt){
+clearTimeout(timer);
+}, false);
+      function launch_app_or_alt_url(el) {
+lastInterval = getTime();
+heartbeat = setInterval(intervalHeartbeat, 200);
+document.location = 'coynitest.com://paidorder?amount=1&wallet=9b303505-5371-4c36-917a-de7db0e9fdfe';
+timer = setTimeout(function () {
+document.location = 'https://apps.apple.com/in/app/facebook/id284882215';
+}, 2000);
+}
+      $(".source_url").click(function(event) {
+launch_app_or_alt_url($(this));
+event.preventDefault();
+});
+</script>
 
-(function() {
-  var app = {
-    launchApp: function() {
-      window.location.replace("coynitest.com://paidorder?amount=1&wallet=9b303505-5371-4c36-917a-de7db0e9fdfe");
-      this.timer = setTimeout(this.openWebApp, 1000);
-    },
-
-    openWebApp: function() {
-      window.location.replace("https://apps.apple.com/in/app/facebook/id284882215");
-    }
-  };
-
-  app.launchApp();
-})();
-    </script>
     <style type="text/css">
       .twitter-detect {
         display: none;
